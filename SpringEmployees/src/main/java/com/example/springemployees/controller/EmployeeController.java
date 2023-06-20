@@ -41,7 +41,7 @@ public class EmployeeController {
     }
     @PostMapping("/employees")
     public String createEmployee(@Validated @ModelAttribute Employees employees, Model model) {
-        employeesService.Save(employees);
+        employeesService.save(employees);
         model.addAttribute("success", "Create success!");
         return "redirect:/employees";
     }

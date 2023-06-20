@@ -1,21 +1,19 @@
 package com.example.springemployees.entity;
 
-
-
 import javax.persistence.Entity;
+import javax.persistence.Id;
 import javax.persistence.Table;
 import java.math.BigDecimal;
 
 @Entity
 @Table(name = "employees")
 public class Employees {
+    @Id
     private long id;
     private String name;
     private BigDecimal wage;
 
-    public long getId() {
-        return id;
-    }
+
 
     public String getName() {
         return name;
@@ -46,5 +44,13 @@ public class Employees {
         this.name = name;
         this.id = id;
         this.wage = wage;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
     }
 }
