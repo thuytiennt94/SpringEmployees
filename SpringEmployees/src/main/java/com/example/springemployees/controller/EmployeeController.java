@@ -17,6 +17,12 @@ import java.util.List;
 @Controller
 public class EmployeeController {
     private EmployeesService employeesService;
+
+    @GetMapping("")
+    public String getList() {
+        return "/index";
+    }
+
     public EmployeeController (EmployeesService employeesService){
         this.employeesService = employeesService;
     }
@@ -27,13 +33,13 @@ public class EmployeeController {
         System.out.println(list);
         return "list";
     }
-    @GetMapping("/employees/create")
+    @GetMapping("/employees")
     public String createProcess(Model model) {
         Employees employees = new Employees();
         model.addAttribute("employees", employees);
-        return "create";
+        return "/create";
     }
-    @PostMapping("/employees/save")
+    @PostMapping("/employees")
     public String createEmployee(@Validated @ModelAttribute Employees employees, Model model) {
         employeesService.Save(employees);
         model.addAttribute("success", "Create success!");
