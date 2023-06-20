@@ -6,7 +6,9 @@ import javafx.scene.canvas.GraphicsContext;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 
+import org.springframework.validation.annotation.Validated;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 
@@ -22,12 +24,19 @@ public class EmployeeController {
     public String getAllEmployees(Model model) {
         List<Employees> list = employeesService.findAllEmployees();
         model.addAttribute("list", list);
+        System.out.println(list);
         return "list";
     }
-
-    @PostMapping("/employees")
-    public String createEmployee(Employees employees) {
+    @GetMapping("/employees/create")
+    public String createProcess(Model model) {
+        Employees employees = new Employees();
+        model.addAttribute("employees", employees);
+        return "create";
+    }
+    @PostMapping("/employees/save")
+    public String createEmployee(@Validated @ModelAttribute Employees employees, Model model) {
         employeesService.Save(employees);
-        return "saveEmployees";
+        model.addAttribute("success", "Create success!");
+        return "redirect:/employees";
     }
 }
