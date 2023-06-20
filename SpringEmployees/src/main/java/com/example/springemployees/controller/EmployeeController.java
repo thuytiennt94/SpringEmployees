@@ -31,7 +31,7 @@ public class EmployeeController {
         List<Employees> list = employeesService.findAllEmployees();
         model.addAttribute("list", list);
         System.out.println(list);
-        return "list";
+        return "/list";
     }
     @GetMapping("/employees")
     public String createProcess(Model model) {
